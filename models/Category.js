@@ -74,7 +74,7 @@ class Category {
   }
 
   testClass() {
-    return 'testClass method being called'
+    return 'testClass method being called to category model through categories routes'
   }
 
 }

@@ -3,6 +3,7 @@ const { connectToDb } = require('./db')
 
 const userRoutes = require('./routes/userRoutes')
 const categoryRoutes = require('./routes/categoryRoutes')
+const tagRoutes = require('./routes/tagRoutes')
 
 const app = express()
 app.use(express.json())
@@ -11,6 +12,7 @@ app.use(express.json())
 /////////////////// routes //////////////////
 app.use('/users', userRoutes);
 app.use('/categories', categoryRoutes)
+app.use('/tags', tagRoutes)
 
 
 

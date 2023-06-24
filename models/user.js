@@ -70,7 +70,7 @@ class User {
   }
 
   testClass() {
-    return 'testClass method being called'
+    return 'testClass method being called to user model through users routes'
   }
 
 }

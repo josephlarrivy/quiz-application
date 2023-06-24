@@ -12,14 +12,14 @@ Table categories {
   name varchar [note: 'Category Name']
 }
 
+Table tags {
+  id integer [primary key]
+  name varchar [note: 'Tag Name']
+}
+
 Table points {
   id integer [primary key]
   amount integer [note: 'Point Amount for a Question']
-}
-
-Table tags {
-  id integer [primary key]
-  tag_name varchar [note: 'Tag Name']
 }
 
 Table questions {
