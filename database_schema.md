@@ -17,19 +17,20 @@ Table tags {
   name varchar [note: 'Tag Name']
 }
 
-Table points {
-  id integer [primary key]
-  amount integer [note: 'Point Amount for a Question']
-}
-
 Table questions {
   id integer [primary key]
   question_text text
   category_id integer
-  point_id integer
+  points integer
   creator_id integer
   created_at timestamp
 }
+
+
+
+
+
+
 
 Table questions_tags {
   question_id integer
