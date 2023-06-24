@@ -1,71 +1,71 @@
 const express = require('express');
 const { connectToDb } = require('../db')
-const userRoutes = express.Router();
+const categoryRoutes = express.Router();
 
-const User = require('../models/User');
+const Category = require('../models/Category');
 
-let user;
+let category;
 
 connectToDb((err) => {
   if (!err) {
-    user = new User();
+    category = new Category();
   }
 });
 
-userRoutes.get('/testconnection', (req, res) => {
-  response = user.testClass();
+categoryRoutes.get('/testconnection', (req, res) => {
+  response = category.testClass();
   res.json({ response });
 });
 
 /////////////////// routes //////////////////
 
-userRoutes.post('/', async (req, res) => {
+categoryRoutes.post('/create', async (req, res) => {
   try {
-    const result = await user.createUser(req.body);
+    const result = await category.createCategory(req.body);
     res.status(201).json(result);
   } catch (err) {
     res.status(500).json({ error: err });
   }
 });
 
-userRoutes.patch('/:id', async (req, res) => {
+categoryRoutes.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
   try {
-    const result = await user.updateUser(id, updates);
+    const result = await category.updateCategory(id, updates);
     res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ error: err });
   }
 });
 
-userRoutes.delete('/:id', async (req, res) => {
+categoryRoutes.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await user.deleteUser(id);
+    const result = await category.deleteCategory(id);
     res.status(202).json(result);
   } catch (err) {
     res.status(500).json({ error: err });
   }
 });
 
-userRoutes.get('/:username', async (req, res) => {
-  const { username } = req.params;
+categoryRoutes.get('/:id', async (req, res) => {
+  const { id } = req.params;
   try {
-    const result = await user.getUserByUsername(username);
+    const result = await category.getCategoryById(id);
     res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ error: err });
   }
 });
 
-userRoutes.get('/', async (req, res) => {
+categoryRoutes.get('/', async (req, res) => {
   try {
-    const result = await user.getUsers();
+    const result = await category.getAllCategories();
     res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ error: err });
   }
 });
 
-module.exports = userRoutes;
+module.exports = categoryRoutes;

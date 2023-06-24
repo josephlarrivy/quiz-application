@@ -1,15 +1,25 @@
 const express = require('express');
 const { connectToDb } = require('./db')
+
 const userRoutes = require('./routes/userRoutes')
+const categoryRoutes = require('./routes/categoryRoutes')
 
 const app = express()
 app.use(express.json())
-app.use('/users', userRoutes);
 
+
+/////////////////// routes //////////////////
+app.use('/users', userRoutes);
+app.use('/categories', categoryRoutes)
+
+
+
+
+//////////// starting server ///////////
 connectToDb((err) => {
   if (!err) {
-    app.listen(3000, () => {
-      console.log('app listening on port 3000')
+    app.listen(3001, () => {
+      console.log('app listening on port 3001')
     })
   }
 })
