@@ -47,11 +47,22 @@ class User {
     }
   }
 
-  // Retrieves a user from the database based on the given user ID and returns all of their data except for their password
+  // Retrieves a user from the database based on the given username and returns all of their data except for their password
   async getUserByUsername(username) {
     try {
       const result = await this.db.collection('users')
         .findOne({ username }, { projection: { password: 0 } });
+      return result;
+    } catch (err) {
+      throw new Error('could not retrieve document');
+    }
+  }
+
+  // Retrieves a user from the database based on the given id and returns all of their data except for their password
+  async getUserById(userId) {
+    try {
+      const result = await this.db.collection('users')
+        .findOne({ _id: new ObjectId(userId) }, { projection: { password: 0 } });
       return result;
     } catch (err) {
       throw new Error('could not retrieve document');

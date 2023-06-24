@@ -17,7 +17,7 @@ class Question {
     }
   }
 
-  // Updates the user data for a specific user in the database
+  // Updates the user data for a specific question in the database
   async updateQuestion(questionId, updatedQuestionData) {
     if (ObjectId.isValid(questionId)) {
       try {
@@ -47,7 +47,7 @@ class Question {
     }
   }
 
-  // Retrieves a question from the database based and returns it
+  // Retrieves a question from the database and returns it
   async getQuestionById(questionId) {
     if (ObjectId.isValid(questionId)) {
       try {

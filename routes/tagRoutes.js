@@ -19,6 +19,7 @@ tagRoutes.get('/testconnection', (req, res) => {
 
 /////////////////// routes //////////////////
 
+// creates a new tag
 tagRoutes.post('/', async (req, res) => {
   try {
     const result = await tag.createTag(req.body);
@@ -28,6 +29,7 @@ tagRoutes.post('/', async (req, res) => {
   }
 });
 
+// updates the data about a tag
 tagRoutes.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
@@ -39,6 +41,7 @@ tagRoutes.patch('/:id', async (req, res) => {
   }
 });
 
+// deletes a tat
 tagRoutes.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -49,6 +52,7 @@ tagRoutes.delete('/:id', async (req, res) => {
   }
 });
 
+// gets information about a tag based on its id
 tagRoutes.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -59,6 +63,7 @@ tagRoutes.get('/:id', async (req, res) => {
   }
 });
 
+// gets all tags
 tagRoutes.get('/', async (req, res) => {
   try {
     const result = await tag.getAllTags();

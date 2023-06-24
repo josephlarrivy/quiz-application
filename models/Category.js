@@ -17,7 +17,7 @@ class Category {
     }
   }
 
-  // Updates the user data for a specific user in the database
+  // Updates the category data for a specific category in the database
   async updateCategory(categoryId, updatedCategoryData) {
     if (ObjectId.isValid(categoryId)) {
       try {
@@ -32,7 +32,7 @@ class Category {
     }
   }
 
-  //Deletes a category from the database based on the given user ID
+  // Deletes a category from the database based on the given category ID
   async deleteCategory(categoryId) {
     if (ObjectId.isValid(categoryId)) {
       try {

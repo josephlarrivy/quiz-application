@@ -19,6 +19,7 @@ userRoutes.get('/testconnection', (req, res) => {
 
 /////////////////// routes //////////////////
 
+// create a new user
 userRoutes.post('/', async (req, res) => {
   try {
     const result = await user.createUser(req.body);
@@ -28,6 +29,7 @@ userRoutes.post('/', async (req, res) => {
   }
 });
 
+// updates information about a user
 userRoutes.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
@@ -39,6 +41,7 @@ userRoutes.patch('/:id', async (req, res) => {
   }
 });
 
+// deletes a user
 userRoutes.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -49,7 +52,8 @@ userRoutes.delete('/:id', async (req, res) => {
   }
 });
 
-userRoutes.get('/:username', async (req, res) => {
+// gets user information based on username
+userRoutes.get('/username/:username', async (req, res) => {
   const { username } = req.params;
   try {
     const result = await user.getUserByUsername(username);
@@ -59,6 +63,18 @@ userRoutes.get('/:username', async (req, res) => {
   }
 });
 
+// gets user information based on id
+userRoutes.get('/id/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await user.getUserById(id);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+});
+
+// gets information about all users
 userRoutes.get('/', async (req, res) => {
   try {
     const result = await user.getUsers();

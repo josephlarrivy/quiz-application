@@ -19,6 +19,7 @@ categoryRoutes.get('/testconnection', (req, res) => {
 
 /////////////////// routes //////////////////
 
+// creates a new category
 categoryRoutes.post('/create', async (req, res) => {
   try {
     const result = await category.createCategory(req.body);
@@ -28,6 +29,7 @@ categoryRoutes.post('/create', async (req, res) => {
   }
 });
 
+// updates data about a category
 categoryRoutes.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
@@ -39,6 +41,7 @@ categoryRoutes.patch('/:id', async (req, res) => {
   }
 });
 
+// deletes a category
 categoryRoutes.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -49,6 +52,7 @@ categoryRoutes.delete('/:id', async (req, res) => {
   }
 });
 
+// get a category by id
 categoryRoutes.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -59,6 +63,7 @@ categoryRoutes.get('/:id', async (req, res) => {
   }
 });
 
+// gets all category names
 categoryRoutes.get('/', async (req, res) => {
   try {
     const result = await category.getAllCategories();

@@ -19,6 +19,7 @@ questionRoutes.get('/testconnection', (req, res) => {
 
 /////////////////// routes //////////////////
 
+// creates a new question
 questionRoutes.post('/', async (req, res) => {
   try {
     const result = await question.createQuestion(req.body);
@@ -28,6 +29,7 @@ questionRoutes.post('/', async (req, res) => {
   }
 });
 
+// updates the data about a question
 questionRoutes.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
@@ -39,6 +41,7 @@ questionRoutes.patch('/:id', async (req, res) => {
   }
 });
 
+// deletes a question
 questionRoutes.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -49,6 +52,7 @@ questionRoutes.delete('/:id', async (req, res) => {
   }
 });
 
+// gets a question based in its id
 questionRoutes.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -59,6 +63,7 @@ questionRoutes.get('/:id', async (req, res) => {
   }
 });
 
+// gets all questions
 questionRoutes.get('/', async (req, res) => {
   try {
     const result = await question.getAllQuestions();

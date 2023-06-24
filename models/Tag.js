@@ -6,7 +6,7 @@ class Tag {
     this.db = getDb();
   }
 
-  // Creates a user an adds to the database
+  // Creates a tag and adds to the database
   async createTag(tagData) {
     try {
       const result = await this.db.collection('tags')
@@ -17,7 +17,7 @@ class Tag {
     }
   }
 
-  // Updates the user data for a specific user in the database
+  // Updates the tag data for a specific tag in the database
   async updateTag(tagId, updatedTagData) {
     if (ObjectId.isValid(tagId)) {
       try {
@@ -32,7 +32,7 @@ class Tag {
     }
   }
 
-  //Deletes a user from the database based on the given user ID
+  //Deletes a tag from the database based on the given tag ID
   async deleteTag(tagId) {
     if (ObjectId.isValid(tagId)) {
       try {
