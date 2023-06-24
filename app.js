@@ -5,6 +5,7 @@ const userRoutes = require('./routes/userRoutes')
 const categoryRoutes = require('./routes/categoryRoutes')
 const tagRoutes = require('./routes/tagRoutes')
 const questionRoutes = require('./routes/questionRoutes')
+const questionTagRoutes = require('./routes/questionTagRoutes')
 
 const app = express()
 app.use(express.json())
@@ -15,7 +16,7 @@ app.use('/users', userRoutes);
 app.use('/categories', categoryRoutes)
 app.use('/tags', tagRoutes)
 app.use('/questions', questionRoutes)
-
+app.use('/questiontags', questionTagRoutes)
 
 
 //////////// starting server ///////////

@@ -26,12 +26,6 @@ Table questions {
   created_at timestamp
 }
 
-
-
-
-
-
-
 Table questions_tags {
   question_id integer
   tag_id integer
