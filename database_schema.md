@@ -19,7 +19,7 @@ Table tags {
 
 Table questions {
   id integer [primary key]
-  question_text text
+  text text
   category_id integer
   points integer
   creator_id integer
