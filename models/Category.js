@@ -7,13 +7,22 @@ class Category {
   }
 
   // Creates a category an adds to the database
-  async createCategory(data) {
+  async createCategory(categoryData) {
     try {
+      const { name } = categoryData;
+
+      // Check if the category already exists
+      const existingCategory = await this.db.collection('categories').findOne({ name });
+
+      if (existingCategory) {
+        throw new Error('Category already exists');
+      }
+
       const result = await this.db.collection('categories')
-        .insertOne(data);
+        .insertOne(categoryData);
       return result;
     } catch (err) {
-      throw new Error('could not create document');
+      throw new Error('category already exists');
     }
   }
 

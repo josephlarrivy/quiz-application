@@ -1,8 +1,18 @@
 const express = require('express');
 const { connectToDb } = require('../db')
+const jsonschema = require("jsonschema");
 const categoryRoutes = express.Router();
-
 const Category = require('../models/Category');
+const { ExpressError,
+  NotFoundError,
+  UnauthorizedError,
+  BadRequestError,
+  ForbiddenError } = require('../ExpressError')
+
+const newCategorySchema = require('../schemas/newCategorySchema.json')
+
+
+
 
 let category;
 
@@ -20,12 +30,18 @@ categoryRoutes.get('/testconnection', (req, res) => {
 /////////////////// routes //////////////////
 
 // creates a new category
+// schema requires category to be at least three characters long
 categoryRoutes.post('/create', async (req, res) => {
   try {
+    const validator = jsonschema.validate(req.body, newCategorySchema)
+    if (!validator.valid) {
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
+    }
     const result = await category.createCategory(req.body);
     res.status(201).json(result);
   } catch (err) {
-    res.status(500).json({ error: err });
+    res.status(500).json({ error: err.message });
   }
 });
 

@@ -9,13 +9,22 @@ class Tag {
   // Creates a tag and adds to the database
   async createTag(tagData) {
     try {
-      const result = await this.db.collection('tags')
-        .insertOne(tagData);
+      const { name } = tagData;
+
+      // Check if the tag already exists
+      const existingTag = await this.db.collection('tags').findOne({ name });
+
+      if (existingTag) {
+        throw new Error('Tag already exists');
+      }
+
+      const result = await this.db.collection('tags').insertOne(tagData);
       return result;
     } catch (err) {
-      throw new Error('could not create document');
+      throw new Error('Tag already exists');
     }
   }
+
 
   // Updates the tag data for a specific tag in the database
   async updateTag(tagId, updatedTagData) {

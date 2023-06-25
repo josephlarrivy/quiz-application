@@ -9,13 +9,28 @@ class User {
   // Creates a user an adds to the database
   async createUser(userData) {
     try {
-      const result = await this.db.collection('users')
-        .insertOne(userData);
+      const { username } = userData;
+
+      // Check if the username already exists
+      const existingUser = await this.db.collection('users').findOne({ username });
+
+      if (existingUser) {
+        throw new Error('Username already exists');
+      }
+
+      const result = await this.db.collection('users').insertOne(userData);
       return result;
     } catch (err) {
-      throw new Error('could not create document');
+      if (err.message === 'Username already exists') {
+        throw new Error('Username already exists');
+      }
+
+      throw new Error('Could not create document');
     }
   }
+
+
+
 
   // Updates the user data for a specific user in the database
   async updateUser(userId, updatedUserData) {

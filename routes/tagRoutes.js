@@ -42,7 +42,7 @@ tagRoutes.post('/', async (req, res) => {
     const result = await tag.createTag(req.body);
     res.status(201).json(result);
   } catch (err) {
-    res.status(500).json({ error: err });
+    res.status(500).json({ error: err.message });
   }
 });
 

@@ -9,10 +9,13 @@ const { ExpressError,
   BadRequestError,
   ForbiddenError } = require('../ExpressError')
 
+const newUserSchema = require('../schemas/newUserSchema.json')
+const updateUserSchema = require('../schemas/updateUserSchema.json')
 
 
 
-  
+
+
 let user;
 
 connectToDb((err) => {
@@ -29,20 +32,32 @@ userRoutes.get('/testconnection', (req, res) => {
 /////////////////// routes //////////////////
 
 // create a new user
+// schema requires username, name, password
 userRoutes.post('/', async (req, res) => {
   try {
+    const validator = jsonschema.validate(req.body, newUserSchema);
+    if (!validator.valid) {
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
+    }
     const result = await user.createUser(req.body);
     res.status(201).json(result);
   } catch (err) {
-    res.status(500).json({ error: err });
+    res.status(500).json({ error: err.message });
   }
 });
 
 // updates information about a user
+// schema allows only for name to be changed
 userRoutes.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
   try {
+    const validator = jsonschema.validate(updates, updateUserSchema);
+    if (!validator.valid) {
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
+    }
     const result = await user.updateUser(id, updates);
     res.status(200).json(result);
   } catch (err) {
