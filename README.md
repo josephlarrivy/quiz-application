@@ -138,11 +138,19 @@ GET - get a question by its id
 ```
 /questions/:id
 ```
+GET - get all questions written by a user
+```
+/questions/user/:id'
+```
+GET - get all questions in a category
+```
+/questions/category/:id'
+```
 POST - create a new question - accepts a json body in the request
 ```
 /questions/
 ```
-The json body for a new question must include the question's text, four options in an array, which of the options is the correct answer, the points that the question is worth (as an integer), and the name of the creator of the question.
+The json body for a new question must include the question's text, four options in an array, which of the options is the correct answer, the points that the question is worth (as an integer), the id of the creator of the question, and the id of the category to which the question belongs.
 ```
 {
   "text": "Which animal is known as the 'king of the jungle'?",
@@ -153,8 +161,9 @@ The json body for a new question must include the question's text, four options 
     "Giraffe"
   ],
   "solution": "Lion",
-  "points": 5,
-  "creator": "AnimalExpert234"
+  "points": 10,
+  "creator_id": "6493589e86634452bf44bfd1",
+  "category_id": "64974bb3709be30cdad26b71"
 }
 ```
 PATCH - updates a question by its id - accepts a json body in the request
@@ -164,16 +173,17 @@ PATCH - updates a question by its id - accepts a json body in the request
 This endpoint is set up so that all fields are required in the request body when any part of the question is going to be changed.
 ```
 {
-  "text": "In which year did the United States declare independence?",
+  "text": "Which animal is known as the 'king of the jungle'?",
   "options": [
-    "1776",
-    "1789",
-    "1804",
-    "1865"
+    "Lion",
+    "Tiger",
+    "Elephant",
+    "Giraffe"
   ],
-  "solution": "1776",
-  "points": 7,
-  "creator": "HistoryBuff789"
+  "solution": "Lion",
+  "points": 20,
+  "creator_id": "6493589e86634452bf44bfd1",
+  "category_id": "64974bb3709be30cdad26b71"
 }
 
 ```
@@ -207,3 +217,4 @@ DELETE - remove the association between a tag and a question. Tags and questions
 ```
 /:questionId/:tagId
 ```
+
