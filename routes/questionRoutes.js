@@ -94,4 +94,26 @@ questionRoutes.get('/', async (req, res) => {
   }
 });
 
+// get all questions written by a specific user
+questionRoutes.get('/user/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await question.getQuestionsByUser(id);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+});
+
+// get all questions written by a specific user
+questionRoutes.get('/category/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await question.getQuestionsByCategory(id);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+});
+
 module.exports = questionRoutes;

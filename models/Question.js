@@ -73,6 +73,30 @@ class Question {
     }
   }
 
+  // gets all questions written by a specific user
+  async getQuestionsByUser(user_id) {
+    try {
+      const questions = await this.db.collection('questions')
+        .find({ creator_id: user_id })
+        .toArray();
+      return questions;
+    } catch (err) {
+      throw new Error('could not retrieve questions');
+    }
+  }
+
+  // gets all questions in a category
+  async getQuestionsByCategory(cat_id) {
+    try {
+      const questions = await this.db.collection('questions')
+        .find({ category_id: cat_id })
+        .toArray();
+      return questions;
+    } catch (err) {
+      throw new Error('could not retrieve questions');
+    }
+  }
+
   testClass() {
     return 'testClass method being called to Question model through questions routes'
   }
