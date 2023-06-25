@@ -1,7 +1,5 @@
 # Question Vault API
-##### A backend for all of your trivia and quiz needs
-#
-
+A backend for all of your trivia and quiz needs
 Written and maintained by:   [www.josephlarrivy.com](https://joseph-larrivy-portfolio.herokuapp.com/)
 
 
@@ -20,7 +18,7 @@ Question Vault uses a number of technologies:
 - [MongoDB] - database
 
 
-## Endpoints
+# Endpoints
 This backend has endpoints for users, tags, categories, and questions
 ##### USERS endpoints
 ---
@@ -67,7 +65,7 @@ GET - get all categories
 ```
 /categories/
 ```
-GET - get information on a caregoty by its id
+GET - get information on a caregory by its id
 ```
 /categories/:id
 ```
@@ -217,4 +215,3 @@ DELETE - remove the association between a tag and a question. Tags and questions
 ```
 /:questionId/:tagId
 ```
-
