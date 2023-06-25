@@ -1,5 +1,5 @@
-Trivia Application Backend API Documentation
-This documentation provides an overview of the backend API routes, models, and schemas for the Trivia Application.
+## Trivia Application Backend API Documentation
+# This documentation provides an overview of the backend API routes, models, and schemas for the Trivia Application.
 
 Table of Contents
 User Routes
