@@ -10,6 +10,7 @@ const { ExpressError,
   ForbiddenError } = require('../ExpressError')
 
 const newCategorySchema = require('../schemas/newCategorySchema.json')
+const updateCategorySchema = require('../schemas/updateCategorySchema.json')
 
 
 
@@ -31,7 +32,7 @@ categoryRoutes.get('/testconnection', (req, res) => {
 
 // creates a new category
 // schema requires category to be at least three characters long
-categoryRoutes.post('/create', async (req, res) => {
+categoryRoutes.post('/', async (req, res) => {
   try {
     const validator = jsonschema.validate(req.body, newCategorySchema)
     if (!validator.valid) {
@@ -50,6 +51,11 @@ categoryRoutes.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
   try {
+    const validator = jsonschema.validate(req.body, updateCategorySchema)
+    if (!validator.valid) {
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
+    }
     const result = await category.updateCategory(id, updates);
     res.status(200).json(result);
   } catch (err) {

@@ -50,6 +50,11 @@ questionRoutes.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
   try {
+    const validator = jsonschema.validate(updates, newQuestionSchema)
+    if (!validator.valid) {
+      const errs = validator.errors.map(e => e.stack);
+      throw new BadRequestError(errs);
+    }
     const result = await question.updateQuestion(id, updates);
     res.status(200).json(result);
   } catch (err) {

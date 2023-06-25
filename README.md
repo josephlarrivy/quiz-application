@@ -1,208 +1,209 @@
-## Trivia Application Backend API Documentation
-# This documentation provides an overview of the backend API routes, models, and schemas for the Trivia Application.
+# Question Vault API
+##### A backend for all of your trivia and quiz needs
+#
 
-Table of Contents
-User Routes
-User Model
-User Schemas
-User Routes
-The following routes are available for managing user data.
+Written and maintained by:   [www.josephlarrivy.com](https://joseph-larrivy-portfolio.herokuapp.com/)
 
-GET /testconnection
-Tests the connection to the backend and the User model.
 
-Response:
+### Features
+- Creating multiple-choice questions
+- Building quizes based on categories
+- Retrieving questions based on specific tags or categories
 
-Status: 200 OK
 
-Body:
+### Tech
 
-json
-Copy code
+Question Vault uses a number of technologies:
+
+- [Node.js] - evented I/O for the backend
+- [Express.js] - fast node.js network app framework
+- [MongoDB] - database
+
+
+## Endpoints
+This backend has endpoints for users, tags, categories, and questions
+##### USERS endpoints
+---
+GET - get all information except passwords for all users
+```
+/users/
+```
+GET - get all information except password for a specific user by id
+```
+/users/id/:id
+```
+GET - get all information except password for a specific user by username
+```
+/users/username/:username
+```
+POST - create a new user - accepts a json body in the request
+```
+/users/
+```
+```
 {
-  "response": "testClass method being called to user model through users routes"
+    "username" : "example_user",
+    "password" : "example_passowrd",
+    "name" : "Example User"
 }
-POST /users
-Creates a new user.
-
-Request Body:
-
-json
-Copy code
+```
+PATCH - update the name of a user - accepts a json body
+```
+/users/:id
+```
+```
 {
-  "username": "exampleUser",
-  "name": "John Doe",
-  "password": "examplePassword"
+    "name" : "Example User Updated"
 }
-Response:
+```
+DELETE - remove a user from the database
+```
+/users/:id
+```
 
-Status: 201 Created
-Body: The inserted user object
-PATCH /users/:id
-Updates information about a user.
-
-Request Parameters:
-
-id (string): The ID of the user to update
-Request Body:
-
-json
-Copy code
+##### CATEGORIES endpoints
+---
+GET - get all categories
+```
+/categories/
+```
+GET - get information on a caregoty by its id
+```
+/categories/:id
+```
+POST - create a new category - accepts a json body in the request
+```
+/categories/
+```
+```
 {
-  "name": "New Name"
+    "name" : "New Category Name"
 }
-Response:
-
-Status: 200 OK
-Body: The updated user object
-DELETE /users/:id
-Deletes a user.
-
-Request Parameters:
-
-id (string): The ID of the user to delete
-Response:
-
-Status: 202 Accepted
-Body: The deletion result
-GET /users/username/:username
-Retrieves user information based on the username.
-
-Request Parameters:
-
-username (string): The username of the user to retrieve
-Response:
-
-Status: 200 OK
-Body: The user object (excluding the password)
-GET /users/id/:id
-Retrieves user information based on the ID.
-
-Request Parameters:
-
-id (string): The ID of the user to retrieve
-Response:
-
-Status: 200 OK
-Body: The user object (excluding the password)
-GET /users
-Retrieves information about all users.
-
-Response:
-
-Status: 200 OK
-Body: An array of user objects (excluding the password)
-User Model
-The User class represents the user model used for managing user data.
-
-Class Methods
-createUser(userData)
-Creates a user and adds it to the database.
-
-Parameters:
-userData (object): An object containing the user data
-Returns: A promise that resolves to the result of the insertion
-updateUser(userId, updatedUserData)
-Updates the user data for a specific user in the database.
-
-Parameters:
-userId (string): The ID of the user to update
-updatedUserData (object): An object containing the updated user data
-Returns: A promise that resolves to the result of the update
-deleteUser(userId)
-Deletes a user from the database based on the given user ID.
-
-Parameters:
-userId (string): The ID of the user to delete
-Returns: A promise that resolves to the result of the deletion
-getUserByUsername(username)
-Retrieves a user from the database based on the given username and returns all of their data except for their password.
-
-Parameters:
-username (string): The username of the user to retrieve
-Returns: A promise that resolves to the user object (excluding the password)
-getUserById(userId)
-Retrieves a user from the database based on the given ID and returns all of their data except for their password.
-
-Parameters:
-userId (string): The ID of the user to retrieve
-Returns: A promise that resolves to the user object (excluding the password)
-getUsers()
-Retrieves all users from the database and returns all of their data except for their password.
-
-Returns: A promise that resolves to an array of user objects (excluding the password)
-Example Usage
-javascript
-Copy code
-const user = new User();
-
-// Example usage of class methods
-user.createUser(userData)
-  .then(result => console.log(result))
-  .catch(error => console.error(error));
-
-user.updateUser(userId, updatedUserData)
-  .then(result => console.log(result))
-  .catch(error => console.error(error));
-
-user.deleteUser(userId)
-  .then(result => console.log(result))
-  .catch(error => console.error(error));
-
-user.getUserByUsername(username)
-  .then(result => console.log(result))
-  .catch(error => console.error(error));
-
-user.getUserById(userId)
-  .then(result => console.log(result))
-  .catch(error => console.error(error));
-
-user.getUsers()
-  .then(users => console.log(users))
-  .catch(error => console.error(error));
-User Schemas
-The following JSON schemas define the structure and validation rules for user data.
-
-newUserSchema.json
-json
-Copy code
+```
+PATCH - updates the name of a category by its id - accepts a json body in the request
+```
+/categories/:id
+```
+```
 {
-  "type": "object",
-  "properties": {
-    "username": {
-      "type": "string",
-      "minLength": 1
-    },
-    "name": {
-      "type": "string",
-      "minLength": 1
-    },
-    "password": {
-      "type": "string",
-      "minLength": 1
-    }
-  },
-  "required": [
-    "username",
-    "name",
-    "password"
+    "name" : "Category Name Updated"
+}
+```
+DELETE - remove a category from the database
+```
+/categories/:id
+```
+
+
+##### TAGS endpoints
+---
+GET - get all tags
+```
+/tags/
+```
+GET - get information on a tag by its id
+```
+/tags/:id
+```
+POST - create a new tag - accepts a json body in the request
+```
+/tags/
+```
+```
+{
+    "name" : "New Tag"
+}
+```
+PATCH - updates the name of a tag by its id - accepts a json body in the request
+```
+/tags/:id
+```
+```
+{
+    "name" : "Tag Name Updated"
+}
+```
+DELETE - remove a tag from the database
+```
+/tags/:id
+```
+
+##### QUESTIONS endpoints
+---
+GET - get all questions
+```
+/questions/
+```
+GET - get a question by its id
+```
+/questions/:id
+```
+POST - create a new question - accepts a json body in the request
+```
+/questions/
+```
+The json body for a new question must include the question's text, four options in an array, which of the options is the correct answer, the points that the question is worth (as an integer), and the name of the creator of the question.
+```
+{
+  "text": "Which animal is known as the 'king of the jungle'?",
+  "options": [
+    "Lion",
+    "Tiger",
+    "Elephant",
+    "Giraffe"
   ],
-  "additionalProperties": false
+  "solution": "Lion",
+  "points": 5,
+  "creator": "AnimalExpert234"
 }
-updateUserSchema.json
-json
-Copy code
+```
+PATCH - updates a question by its id - accepts a json body in the request
+```
+/questions/:id
+```
+This endpoint is set up so that all fields are required in the request body when any part of the question is going to be changed.
+```
 {
-  "type": "object",
-  "properties": {
-    "name": {
-      "type": "string",
-      "minLength": 1
-    }
-  },
-  "required": [
-    "name"
+  "text": "In which year did the United States declare independence?",
+  "options": [
+    "1776",
+    "1789",
+    "1804",
+    "1865"
   ],
-  "additionalProperties": false
+  "solution": "1776",
+  "points": 7,
+  "creator": "HistoryBuff789"
 }
-Feel free to refer to this documentation when building the frontend for the Trivia Application.
+
+```
+DELETE - remove a question from the database
+```
+/questions/:id
+```
+
+##### QUESTIONTAGS endpoints
+---
+POST - connects a tag to a question - accepts a json body in the request
+```
+/questiontags/
+```
+Include the id of the question and the id of the tag as "questionId" and "tagId" respectively. The database table that the endpoint repesents is a many-to-many relationship where a question can be associated with multiple tags and any given tag can be associated with multiple questions.
+```
+{
+    "questionId" : "649758baae2a8873d89c465e",
+    "tagId" : "649751e5796c9e634492529f"
+}
+```
+GET - gets all tags (returning their ids) that are associated with a given question using the question's id
+```
+/tags/:questionId
+```
+GET - gets all questions (returning their ids) that are associated with a given tag using the tag's id
+```
+/questions/:tagId
+```
+DELETE - remove the association between a tag and a question. Tags and questions will not be affected, only the remationship between them is removed
+```
+/:questionId/:tagId
+```
