@@ -1,9 +1,18 @@
 const express = require('express');
 const { connectToDb } = require('../db')
+const jsonschema = require("jsonschema");
 const userRoutes = express.Router();
-
 const User = require('../models/User');
+const { ExpressError,
+  NotFoundError,
+  UnauthorizedError,
+  BadRequestError,
+  ForbiddenError } = require('../ExpressError')
 
+
+
+
+  
 let user;
 
 connectToDb((err) => {
