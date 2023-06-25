@@ -1,5 +1,6 @@
 # Question Vault API
 A backend for all of your trivia and quiz needs
+
 Written and maintained by:   [www.josephlarrivy.com](https://joseph-larrivy-portfolio.herokuapp.com/)
 
 
@@ -138,11 +139,11 @@ GET - get a question by its id
 ```
 GET - get all questions written by a user
 ```
-/questions/user/:id'
+/questions/user/:id
 ```
 GET - get all questions in a category
 ```
-/questions/category/:id'
+/questions/category/:id
 ```
 POST - create a new question - accepts a json body in the request
 ```
