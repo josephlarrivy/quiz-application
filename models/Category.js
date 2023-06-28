@@ -2,8 +2,8 @@ const { getDb } = require('../db')
 const { ObjectId } = require('mongodb');
 
 class Category {
-  constructor() {
-    this.db = getDb();
+  constructor(db = null) {
+    this.db = db || getDb();
   }
 
   // Creates a category an adds to the database
