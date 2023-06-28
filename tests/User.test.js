@@ -34,10 +34,37 @@ describe("User Model Methods Tests", () => {
     await db.collection('users').deleteMany({});
   });
 
+  ////////////// tests //////////////
+
+  it("should not allow a duplicate username", async () => {
+    const users = db.collection('users');
+
+    const mockUser = {
+      username: 'testing_user',
+      name: 'Testing User',
+      password: 'xxx'
+    };
+
+    try {
+      await user.createUser(mockUser);
+      await user.createUser(mockUser);
+    } catch (err) {
+      expect(err.message).toBe('Username already exists');
+    }
+  });
+
   it("should insert a doc into collection", async () => {
     const users = db.collection('users');
-    const insertedUser = await users.findOne({ name: 'Testing User' });
-    expect(insertedUser.name).toEqual('Testing User');
+
+    const mockUser = {
+      username: 'testing_user_2',
+      name: 'Testing User Two',
+      password: 'xxx'
+    };
+    await user.createUser(mockUser);
+
+    const insertedUser = await users.findOne({ name: 'Testing User Two' });
+    expect(insertedUser.name).toEqual('Testing User Two');
   });
 
   it("should update a doc into collection", async () => {
@@ -70,8 +97,8 @@ describe("User Model Methods Tests", () => {
 
   it("should get a user by their id", async () => {
     const users = db.collection('users');
-    const insertedUser = await user.getUserById(idOfCreatedUser)
-    expect(insertedUser.name).toEqual('Testing User');
+    const foundUser = await user.getUserById(idOfCreatedUser)
+    expect(foundUser.name).toEqual('Testing User');
   });
 
   it("should get all users", async () => {
@@ -90,4 +117,5 @@ describe("User Model Methods Tests", () => {
     allUsers = await user.getUsers()
     expect(allUsers.length).toEqual(2)
   });
+
 });

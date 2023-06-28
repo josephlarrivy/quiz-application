@@ -2,8 +2,8 @@ const { getDb } = require('../db')
 const { ObjectId } = require('mongodb');
 
 class Tag {
-  constructor() {
-    this.db = getDb();
+  constructor(db = null) {
+    this.db = db || getDb();
   }
 
   // Creates a tag and adds to the database
