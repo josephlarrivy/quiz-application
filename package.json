@@ -17,5 +17,8 @@
     "jsonschema": "^1.4.1",
     "mongodb": "^5.6.0",
     "nodemon": "^2.0.22"
+  },
+  "devDependencies": {
+    "@shelf/jest-mongodb": "^4.1.7"
   }
 }

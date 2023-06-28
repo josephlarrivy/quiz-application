@@ -82,7 +82,7 @@ class Tag {
     }
   }
 
-  testClass() {
+  static testClass() {
     return 'testClass method being called to tag model through tags routes'
   }
 

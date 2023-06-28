@@ -82,7 +82,7 @@ class Category {
     }
   }
 
-  testClass() {
+  static testClass() {
     return 'testClass method being called to category model through categories routes'
   }
 

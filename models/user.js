@@ -2,8 +2,8 @@ const { getDb } = require('../db')
 const { ObjectId } = require('mongodb');
 
 class User {
-  constructor() {
-    this.db = getDb();
+  constructor(db = null) {
+    this.db = db || getDb();
   }
 
   // Creates a user an adds to the database
@@ -29,9 +29,6 @@ class User {
     }
   }
 
-
-
-
   // Updates the user data for a specific user in the database
   async updateUser(userId, updatedUserData) {
     if (ObjectId.isValid(userId)) {
@@ -43,7 +40,7 @@ class User {
         throw new Error('could not update document');
       }
     } else {
-      res.status(500).json({ error: 'not a valid document id' })
+      throw new Error('not a valid document id');
     }
   }
 
@@ -95,7 +92,7 @@ class User {
     }
   }
 
-  testClass() {
+  static testClass() {
     return 'testClass method being called to user model through users routes'
   }
 

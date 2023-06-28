@@ -97,7 +97,7 @@ class Question {
     }
   }
 
-  testClass() {
+  static testClass() {
     return 'testClass method being called to Question model through questions routes'
   }
 
